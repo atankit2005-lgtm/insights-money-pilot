@@ -23,15 +23,15 @@ export function MetricCard({
   return (
     <div
       className={cn(
-        "rounded-xl border border-border bg-card p-5 transition-colors hover:border-border/80",
-        accent && "border-primary/30 bg-primary/[0.06]",
+        "finance-surface rounded-lg border border-border bg-card p-4 transition-all hover:border-primary/25 hover:shadow-[0_0_30px_color-mix(in_oklab,var(--primary)_6%,transparent)]",
+        accent && "border-primary/35 bg-primary/[0.07]",
       )}
     >
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</p>
         {icon ? <span className="text-muted-foreground">{icon}</span> : null}
       </div>
-      <p className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{value}</p>
+      <p className="mt-2 text-xl font-semibold sm:text-2xl">{value}</p>
       <div className="mt-2 flex items-center gap-2 text-xs">
         {typeof change === "number" ? (
           <span
@@ -64,9 +64,9 @@ export function Panel({
   className?: string;
 }) {
   return (
-    <section className={cn("rounded-xl border border-border bg-card", className)}>
+    <section className={cn("finance-surface rounded-lg border border-border bg-card", className)}>
       {title ? (
-        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
           <div>
             <h2 className="text-sm font-semibold tracking-tight">{title}</h2>
             {description ? <p className="text-xs text-muted-foreground">{description}</p> : null}
@@ -74,7 +74,7 @@ export function Panel({
           {actions}
         </header>
       ) : null}
-      <div className="p-5">{children}</div>
+      <div className="p-4">{children}</div>
     </section>
   );
 }

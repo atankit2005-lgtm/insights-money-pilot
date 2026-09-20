@@ -36,6 +36,8 @@ export const Route = createFileRoute("/app/transactions")({
       { name: "description", content: "Search, filter, add, edit and delete your income and expense records." },
       { property: "og:title", content: "Transactions — SpendWise" },
       { property: "og:description", content: "Manage every income and expense record in SpendWise." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: TransactionsPage,
@@ -162,7 +164,7 @@ function TransactionsPage() {
       }
     >
       <Panel>
-        <div className="mb-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
           <div className="relative sm:col-span-2 lg:col-span-2">
             <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
             <Input
@@ -224,7 +226,7 @@ function TransactionsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border text-left text-xs uppercase tracking-wide text-muted-foreground">
+                  <tr className="border-b border-border text-left text-[11px] uppercase tracking-wide text-muted-foreground">
                     <th scope="col" className="py-2.5 pr-4 font-medium">
                       <button
                         className="inline-flex items-center gap-1 hover:text-foreground"
@@ -242,9 +244,9 @@ function TransactionsPage() {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {rows.map((t) => (
-                    <tr key={t.id} className="hover:bg-elevated/40">
+                    <tr key={t.id} className="transition-colors hover:bg-primary/[0.04]">
                       <td className="whitespace-nowrap py-3 pr-4 text-muted-foreground">{formatDate(t.date)}</td>
-                      <td className="py-3 pr-4 font-medium">{t.description}</td>
+                      <td className="py-3 pr-4 font-semibold">{t.description}</td>
                       <td className="py-3 pr-4 text-muted-foreground">{categoryName(t.categoryId)}</td>
                       <td className="hidden py-3 pr-4 text-muted-foreground md:table-cell">{t.paymentMethod}</td>
                       <td className={`whitespace-nowrap py-3 pr-4 text-right font-semibold ${t.type === "income" ? "text-primary" : ""}`}>

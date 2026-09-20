@@ -29,6 +29,8 @@ export const Route = createFileRoute("/app/")({
       { name: "description", content: "Your balance, income, expenses, budgets and recent activity at a glance." },
       { property: "og:title", content: "Overview — SpendWise" },
       { property: "og:description", content: "Your financial overview inside SpendWise." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DashboardPage,
@@ -37,7 +39,7 @@ export const Route = createFileRoute("/app/")({
 const tooltipStyle = {
   background: "var(--popover)",
   border: "1px solid var(--border)",
-  borderRadius: 12,
+  borderRadius: 7,
   color: "var(--popover-foreground)",
   fontSize: 12,
 };
@@ -69,8 +71,8 @@ function DashboardPage() {
         </Button>
       }
     >
-      <div className="space-y-6">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="space-y-4">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <MetricCard
             label="Total Balance"
             value={formatINR(summary.balance)}
@@ -98,9 +100,9 @@ function DashboardPage() {
           />
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-3 lg:grid-cols-3">
           <Panel title="Spending Trend" description="Last six months" className="lg:col-span-2">
-            <ChartFrame height={280}>
+            <ChartFrame height={220}>
               <AreaChart data={series} margin={{ left: -18, right: 8, top: 8 }}>
                 <defs>
                   <linearGradient id="spendFill" x1="0" y1="0" x2="0" y2="1">
@@ -118,7 +120,7 @@ function DashboardPage() {
           </Panel>
 
           <Panel title="Category Breakdown" description="Where money goes">
-            <ChartFrame height={280}>
+            <ChartFrame height={220}>
               <PieChart>
                 <Pie data={pieData} dataKey="value" nameKey="name" innerRadius={58} outerRadius={92} paddingAngle={2} stroke="none">
                   {pieData.map((d) => (
@@ -132,9 +134,9 @@ function DashboardPage() {
           </Panel>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-3 lg:grid-cols-3">
           <Panel title="Income vs Expenses" description="Monthly comparison" className="lg:col-span-2">
-            <ChartFrame height={260}>
+            <ChartFrame height={220}>
               <BarChart data={series} margin={{ left: -18, right: 8, top: 8 }} barGap={6}>
                 <CartesianGrid stroke="var(--border)" vertical={false} />
                 <XAxis dataKey="label" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
@@ -181,7 +183,7 @@ function DashboardPage() {
           </Panel>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-3 lg:grid-cols-3">
           <Panel
             title="Recent Transactions"
             description="Latest activity"
