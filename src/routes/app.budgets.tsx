@@ -30,6 +30,8 @@ export const Route = createFileRoute("/app/budgets")({
       { name: "description", content: "Set category limits, monitor utilisation and stay ahead of overspending." },
       { property: "og:title", content: "Budgets — SpendWise" },
       { property: "og:description", content: "Set category limits and monitor utilisation in SpendWise." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: BudgetsPage,
@@ -101,8 +103,8 @@ function BudgetsPage() {
         </Button>
       }
     >
-      <div className="space-y-6">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="space-y-4">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <MetricCard label="Total Budget" value={formatINR(totalBudget)} hint="across all categories" />
           <MetricCard label="Total Spent" value={formatINR(totalSpent)} hint="this period" />
           <MetricCard label="Remaining" value={formatINR(remaining)} hint="left to spend" accent />
@@ -116,13 +118,13 @@ function BudgetsPage() {
             action={<Button onClick={openCreate}>Create budget</Button>}
           />
         ) : (
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {budgets.map((b) => {
               const pct = Math.round((b.spent / b.limit) * 100);
               const tone = budgetTone(pct);
               const left = b.limit - b.spent;
               return (
-                <article key={b.id} className="rounded-xl border border-border bg-card p-5">
+                <article key={b.id} className="finance-surface rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/25">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <h2 className="text-sm font-semibold">{categoryName(b.categoryId)}</h2>

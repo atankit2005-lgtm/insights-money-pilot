@@ -28,6 +28,8 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Track spending, set budgets, reach goals and get intelligent financial insights.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: LandingPage,
@@ -62,22 +64,22 @@ function DashboardPreview() {
   ];
 
   return (
-    <div className="glow-accent overflow-hidden rounded-2xl border border-border bg-card">
+    <div className="glow-accent finance-surface overflow-hidden rounded-lg border border-primary/20 bg-card">
       <div className="flex items-center justify-between border-b border-border px-5 py-3">
         <BrandMark className="text-sm" />
         <span className="text-xs text-muted-foreground">September 2026</span>
       </div>
-      <div className="grid gap-4 p-5">
+      <div className="grid gap-3 p-4">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {cards.map((c) => (
-            <div key={c.label} className="rounded-lg border border-border bg-elevated/50 p-3">
+            <div key={c.label} className="rounded-md border border-border bg-elevated/50 p-3">
               <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{c.label}</p>
               <p className="mt-1 text-base font-semibold">{formatINR(c.value)}</p>
               <p className="text-[11px] text-primary">{c.change}</p>
             </div>
           ))}
         </div>
-        <div className="rounded-lg border border-border bg-elevated/40 p-4">
+        <div className="rounded-md border border-border bg-elevated/40 p-4">
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium">Spending trend</p>
             <p className="text-[11px] text-muted-foreground">Last 12 months</p>
@@ -92,7 +94,7 @@ function DashboardPreview() {
             ))}
           </div>
         </div>
-        <div className="rounded-lg border border-border bg-elevated/40 p-4">
+        <div className="rounded-md border border-border bg-elevated/40 p-4">
           <p className="text-xs font-medium">Budgets</p>
           <ul className="mt-3 space-y-3">
             {budgets.map((b) => {
@@ -120,11 +122,11 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link to="/" aria-label="SpendWise home">
             <BrandMark />
           </Link>
-          <nav aria-label="Primary" className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-8 text-xs text-muted-foreground md:flex">
             <a href="#features" className="hover:text-foreground">Features</a>
             <a href="#intelligence" className="hover:text-foreground">Intelligence</a>
             <a href="#analytics" className="hover:text-foreground">Analytics</a>
@@ -143,17 +145,16 @@ function LandingPage() {
       <main>
         <section className="relative overflow-hidden border-b border-border">
           <div className="pointer-events-none absolute inset-0 surface-grid opacity-30" aria-hidden />
-          <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-28">
+          <div className="mx-auto grid min-h-[calc(100vh-57px)] max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-16">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
                 <Sparkles className="size-3.5" aria-hidden /> AI-powered personal finance
               </span>
-              <h1 className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-                Know where your money goes.
+              <h1 className="mt-6 max-w-xl text-4xl font-bold leading-[1.03] sm:text-5xl lg:text-6xl">
+                Make your money <span className="text-primary">clearer with AI.</span>
               </h1>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                Track your spending, understand your habits, and make smarter financial decisions with
-                SpendWise.
+                SpendWise uses AI to track, understand and improve your finances — so you can save more and worry less.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button asChild size="lg">
@@ -165,7 +166,7 @@ function LandingPage() {
                   <Link to="/app">Explore Demo</Link>
                 </Button>
               </div>
-              <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-border pt-6">
+              <dl className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-border pt-5">
                 <div>
                   <dt className="text-xs uppercase tracking-wide text-muted-foreground">Balance</dt>
                   <dd className="mt-1 text-lg font-semibold">₹42,850</dd>
@@ -185,16 +186,16 @@ function LandingPage() {
         </section>
 
         <section className="border-b border-border" aria-labelledby="pillars-heading">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
             <h2 id="pillars-heading" className="max-w-2xl text-3xl font-semibold tracking-tight">
               A complete loop for your money.
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground">
               Four connected stages that take you from raw transactions to confident decisions.
             </p>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {pillars.map((p, i) => (
-                <article key={p.title} className="rounded-xl border border-border bg-card p-6">
+                <article key={p.title} className="finance-surface rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/25">
                   <span className="text-xs font-medium text-muted-foreground">0{i + 1}</span>
                   <p.icon className="mt-4 size-5 text-primary" aria-hidden />
                   <h3 className="mt-4 text-lg font-semibold tracking-tight">{p.title}</h3>
@@ -206,13 +207,13 @@ function LandingPage() {
         </section>
 
         <section id="features" className="border-b border-border" aria-labelledby="features-heading">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
             <h2 id="features-heading" className="max-w-2xl text-3xl font-semibold tracking-tight">
               Built for people who want clarity, not spreadsheets.
             </h2>
             <div className="mt-12 grid gap-6 md:grid-cols-2">
               {features.map((f) => (
-                <article key={f.title} className="rounded-xl border border-border bg-card p-8">
+                <article key={f.title} className="finance-surface rounded-lg border border-border bg-card p-6">
                   <span className="flex size-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
                     <f.icon className="size-5" aria-hidden />
                   </span>
@@ -225,7 +226,7 @@ function LandingPage() {
         </section>
 
         <section id="intelligence" className="border-b border-border" aria-labelledby="intel-heading">
-          <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center">
+          <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center">
             <div>
               <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary">
                 <Brain className="size-4" aria-hidden /> SpendWise Intelligence
@@ -248,7 +249,7 @@ function LandingPage() {
                 { t: "Expected spending next month is ₹21,400 based on your trend.", m: "Forecast" },
                 { t: "You saved 35% of income this month, your best result in six months.", m: "+₹10,080" },
               ].map((i) => (
-                <li key={i.t} className="flex items-start justify-between gap-4 rounded-xl border border-border bg-card p-5">
+                <li key={i.t} className="finance-surface flex items-start justify-between gap-4 rounded-lg border border-border bg-card p-4">
                   <p className="text-sm text-muted-foreground">{i.t}</p>
                   <span className="shrink-0 text-xs font-semibold text-primary">{i.m}</span>
                 </li>
@@ -258,7 +259,7 @@ function LandingPage() {
         </section>
 
         <section id="analytics" className="border-b border-border" aria-labelledby="analytics-heading">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
             <h2 id="analytics-heading" className="max-w-2xl text-3xl font-semibold tracking-tight">
               Analytics that answer real questions.
             </h2>
