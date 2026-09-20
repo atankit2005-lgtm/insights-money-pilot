@@ -44,8 +44,8 @@ const secondaryNav = [
 
 export function BrandMark({ className }: { className?: string }) {
   return (
-    <span className={cn("flex items-center gap-2 font-semibold tracking-tight", className)}>
-      <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+    <span className={cn("flex items-center gap-2 font-semibold", className)}>
+      <span className="flex size-8 items-center justify-center rounded-md bg-primary/15 text-primary ring-1 ring-primary/25">
         <Wallet className="size-4" aria-hidden />
       </span>
       SpendWise
@@ -70,9 +70,9 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
+        "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all",
         active
-          ? "bg-primary/12 font-medium text-primary"
+          ? "bg-primary/15 font-semibold text-primary shadow-[inset_3px_0_var(--primary)]"
           : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground",
       )}
     >
@@ -116,7 +116,7 @@ function UserMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="flex items-center gap-2 rounded-full border border-border bg-card px-2 py-1.5 text-sm transition-colors hover:bg-elevated"
+          className="flex items-center gap-2 rounded-full border border-border bg-card px-1.5 py-1 text-sm transition-colors hover:border-primary/30 hover:bg-elevated"
           aria-label="Open account menu"
         >
           <span className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
@@ -164,7 +164,7 @@ export function AppShell({
 
   return (
     <div className="min-h-screen bg-background">
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-sidebar-border bg-sidebar px-3 py-5 lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col border-r border-sidebar-border bg-sidebar px-3 py-5 lg:flex">
         <Link to="/" className="px-2 pb-6">
           <BrandMark />
         </Link>
@@ -180,7 +180,7 @@ export function AppShell({
       {open ? (
         <div className="fixed inset-0 z-50 lg:hidden">
           <button
-            className="absolute inset-0 bg-black/70"
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
             aria-label="Close navigation"
             onClick={() => setOpen(false)}
           />
@@ -196,8 +196,8 @@ export function AppShell({
         </div>
       ) : null}
 
-      <div className="lg:pl-64">
-        <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
+      <div className="lg:pl-56">
+        <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-xl">
           <div className="flex items-center gap-3 px-4 py-3.5 sm:px-6">
             <Button
               variant="ghost"
@@ -209,7 +209,7 @@ export function AppShell({
               <Menu className="size-5" />
             </Button>
             <div className="min-w-0 flex-1">
-              <h1 className="truncate text-lg font-semibold tracking-tight">{title}</h1>
+               <h1 className="truncate text-lg font-semibold">{title}</h1>
               {description ? (
                 <p className="truncate text-xs text-muted-foreground">{description}</p>
               ) : null}
@@ -232,7 +232,7 @@ export function AppShell({
             </div>
           </div>
         </header>
-        <main className="px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+        <main className="mx-auto max-w-[1500px] px-4 py-5 sm:px-6 lg:px-7">{children}</main>
       </div>
     </div>
   );
